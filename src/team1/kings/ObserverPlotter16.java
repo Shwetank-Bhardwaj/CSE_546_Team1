@@ -6,7 +6,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import team1.gaurav.Repository11Observer;
 import team1.gaurav.Repository11;
 import team1.sukhpreet.Decorator12;
 import team1.sukhpreet.Decorator12SingleGrade;
@@ -14,8 +13,10 @@ import team1.sukhpreet.Decorator12SingleGrade;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ObserverPlotter16 extends JPanel implements Repository11Observer {
+public class ObserverPlotter16 extends JPanel implements Observer {
 
     private Repository11 repository;
     private HashMap<String, Decorator12> studentList;
@@ -62,10 +63,8 @@ public class ObserverPlotter16 extends JPanel implements Repository11Observer {
 
 
     @Override
-    public void update() {
+    public void update(Observable o, Object arg) {
         studentList = repository.getStudentList();
         setDataset(createDataset(studentList));
     }
-
-
 }

@@ -5,68 +5,48 @@ package team1.gaurav;
  * which is also extends Repository11Observable and implements Repository11Container in order to be observed
  * and to generate iterator respectively
  *
- * @author  Gaurav Ainapur
+ * @author Gaurav Ainapur
  * @version 1.0
- * @since   10-25-2020
+ * @since 10-25-2020
  */
 
 import team1.sukhpreet.Decorator12;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 public class Repository11 extends Observable implements Repository11Container {
 
-	private String filePath;
-	HashMap<String, Decorator12> studentList = new HashMap<String, Decorator12>();
+    private static Repository11 INSTANCE;
+    public Map<String, Decorator12> studentList = new HashMap<>();
 
-	public void updateStudent(String key, Decorator12 newStudent) {
-		studentList.put(key, newStudent);
-		setChanged();
-		notifyAll();
-	}
-	
-		
-	public void loadRoster(String filePath) {
-		this.filePath = filePath;
-		this.studentList = studentList = Repository11FileHelper.readCSV(filePath);
-	}
+    private Repository11() { }
+
+    public static Repository11 getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Repository11();
+        }
+        return INSTANCE;
+    }
+
+    public void updateStudent(String key, Decorator12 newStudent) {
+        studentList.put(key, newStudent);
+        setChanged();
+        notifyAll();
+    }
 
 
+    public void loadRoster(String filePath) {
+        this.studentList = Repository11FileHelper.readCSV(filePath);
+        setChanged();
+        notifyAll();
+    }
 
-	public HashMap<String, Decorator12> getStudentList() {
-		return studentList;
-	}
-
-	@Override
-	public Repository11Iterator getIterator() {
-		return new Student11Iterator();
-	}
-
-	public class Student11Iterator implements Repository11Iterator {
-	
-		int index = 0;
-		@Override
-		public boolean hasNext() {
-			if(index < studentList.keySet().toArray().length) {
-				return true;
-			}
-			return false;
-		}
-	
-		@Override
-		public Object next() {
-			Object key = studentList.keySet().toArray()[index++];
-			System.out.println(key);
-			System.out.println(studentList.get(key));
-			if(!this.hasNext() && key == null) {
-				return null;
-			}
-			return studentList.get(key);
-		}
-	
-	}
+    @Override
+    public Repository11Iterator getIterator() {
+        return new Repository11StudentIterator(studentList);
+    }
 
 }
 

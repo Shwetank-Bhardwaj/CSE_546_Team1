@@ -36,7 +36,7 @@ public class Main17 extends JFrame {
     }
 
     public Main17() {
-        repository11 = new Repository11();
+        repository11 = Repository11.getInstance();
 
         grader13 = new Grader13(repository11);
         reporter14 = new Reporter14(repository11);
@@ -45,8 +45,8 @@ public class Main17 extends JFrame {
 
         observerPlotter16 = new ObserverPlotter16(repository11);
 
-//        repository11.attach(observerTable15);
-//        repository11.attach(observerPlotter16);
+//        repository11.addObserver(observerTable15);
+        repository11.addObserver(observerPlotter16);
     }
 
     private void createUI() {
