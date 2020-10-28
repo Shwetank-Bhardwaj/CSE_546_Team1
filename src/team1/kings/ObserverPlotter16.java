@@ -1,3 +1,4 @@
+/*
 package team1.kings;
 
 import org.jfree.chart.ChartFactory;
@@ -7,8 +8,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import team1.gaurav.Repository11;
-import team1.sukhpreet.Decorator12;
-import team1.sukhpreet.Decorator12SingleGrade;
+import team1.shwetank.Decorator12;
+import team1.shwetank.Decorator12SingleGrade;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -68,3 +69,4 @@ public class ObserverPlotter16 extends JPanel implements Observer {
         setDataset(createDataset(studentList));
     }
 }
+*/

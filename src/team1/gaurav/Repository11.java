@@ -10,7 +10,8 @@ package team1.gaurav;
  * @since 10-25-2020
  */
 
-import team1.sukhpreet.Decorator12;
+
+import team1.sukhpreet.Decorator12Interface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Observable;
 public class Repository11 extends Observable implements Repository11Container {
 
     private static Repository11 INSTANCE;
-    public Map<String, Decorator12> studentList = new HashMap<>();
+    public Map<String, Decorator12Interface> studentList = new HashMap<>();
 
     private Repository11() { }
 
@@ -30,17 +31,17 @@ public class Repository11 extends Observable implements Repository11Container {
         return INSTANCE;
     }
 
-    public void updateStudent(String key, Decorator12 newStudent) {
+    public void updateStudent(String key, Decorator12Interface newStudent) {
         studentList.put(key, newStudent);
         setChanged();
-        notifyAll();
+        notifyObservers();
     }
 
 
     public void loadRoster(String filePath) {
         this.studentList = Repository11FileHelper.readCSV(filePath);
         setChanged();
-        notifyAll();
+        notifyObservers();
     }
 
     @Override

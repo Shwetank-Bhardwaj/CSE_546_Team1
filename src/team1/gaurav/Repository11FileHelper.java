@@ -9,41 +9,39 @@ package team1.gaurav;
  */
 
 import team1.sukhpreet.Decorator12;
+import team1.sukhpreet.Decorator12Interface;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Repository11FileHelper {
 
-	public static final String DELIMITER = ",";
+	private static final String DELIMITER = ",";
+	private static final int studentIdIDX = 0;
+	private static final int firstNameIDX = 1;
+	private static final int lastNameIDX = 2;
+	private static final int programPlanIDX = 3;
+	private static final int academicLevelIDX = 4;
+	private static final int asuriteIdIDX = 5;
 
-	public static final int studentIdIDX = 0;
-	public static final int firstNameIDX = 1;
-	public static final int lastNameIDX = 2;
-	public static final int programPlanIDX = 3;
-	public static final int academicLevelIDX = 4;
-	public static final int asuriteIdIDX = 5;
+	public static Map<String, Decorator12Interface> readCSV(String filePath) {
 
-	public static HashMap<String, Decorator12> readCSV(String filePath) {
+		Map<String, Decorator12Interface> studentList = new HashMap<>();
+		System.out.println(filePath);
 
-		BufferedReader fileReader;
-		HashMap<String, Decorator12> studentList = new HashMap<String, Decorator12>();
-
-		try {
+		try (BufferedReader fileReader = new BufferedReader(new java.io.FileReader(filePath))){
 			String fileRow ="";
-			System.out.println(filePath);
-			fileReader = new BufferedReader(new java.io.FileReader(filePath));
 			fileReader.readLine();
 			while((fileRow = fileReader.readLine()) != null) {
 				String[] tokens = fileRow.split(DELIMITER);
 				if(tokens.length == 6){
-					Decorator12 student = new Decorator12(tokens[studentIdIDX], (tokens[firstNameIDX]+" "+tokens[lastNameIDX]), tokens[programPlanIDX], tokens[academicLevelIDX], tokens[asuriteIdIDX]);
+					Decorator12Interface student = new Decorator12(tokens[studentIdIDX], tokens[firstNameIDX], tokens[lastNameIDX], tokens[programPlanIDX], tokens[academicLevelIDX], tokens[asuriteIdIDX]);
 					studentList.put(tokens[asuriteIdIDX],student);
 				}
 			}
 			fileReader.close();
 			return studentList;
-
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

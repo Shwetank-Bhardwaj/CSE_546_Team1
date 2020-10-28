@@ -1,6 +1,6 @@
 package team1.sukhpreet; /**
  * sukhpreet.Decorator12Decorator is the abstract decorator class extending
- * sukhpreet.Decorator12Interface and is responsible for decorating extra
+ * sukhpreet.Student12Interface and is responsible for decorating extra
  * student information to the Student object along with the core data
  * as a part of the Decorator design pattern
  *
@@ -8,6 +8,7 @@ package team1.sukhpreet; /**
  * @version 1.0
  * @since   10-25-2020
  */
+
 
 import java.util.List;
 
@@ -58,4 +59,11 @@ public class Decorator12Decorator extends Decorator12Interface {
 	public List<Decorator12SingleAttendance> getAttendance() {
 		return student.getAttendance();
 	}
+
+	@Override
+	public String toString() {
+		String data = super.toString();
+		return data + "\n" + getGrades() + "\n" + getAttendance().toString();
+	}
+
 }

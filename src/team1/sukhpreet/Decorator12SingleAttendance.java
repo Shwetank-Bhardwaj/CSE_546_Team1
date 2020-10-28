@@ -1,12 +1,12 @@
 package team1.sukhpreet;
 
 /**
- * Class for storing attendance details
+ * Class for storing attendance details 
  * for a single date.
  *
- * @author Sukhpreet Anand
+ * @author  Sukhpreet Anand
  * @version 1.0
- * @since 10-25-2020
+ * @since   10-25-2020
  */
 
 public class Decorator12SingleAttendance {

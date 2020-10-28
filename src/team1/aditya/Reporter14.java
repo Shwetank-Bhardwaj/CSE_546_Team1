@@ -2,11 +2,10 @@ package team1.aditya;
 
 import team1.gaurav.Repository11;
 import team1.gaurav.Repository11Iterator;
-import team1.sukhpreet.Decorator12;
 import team1.sukhpreet.Decorator12Attendance;
+import team1.sukhpreet.Decorator12Interface;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -27,7 +26,7 @@ public class Reporter14 {
         this.repository = repository;
     }
 
-    public int loadAttendance(String filename) throws FileNotFoundException {
+    public int loadAttendance(String filename) {
         int unknownStudents = 0;
         Map<String, List<String>> studentAttendance = new HashMap<>();
         List<String> headers = new ArrayList<>();
@@ -57,15 +56,17 @@ public class Reporter14 {
 
         Repository11Iterator itr = repository.getIterator();
         while (itr.hasNext()) {
-            Decorator12 student = (Decorator12) itr.next();
+            Decorator12Interface student = itr.next();
             List<String> currentStudentAttendance = studentAttendance.get(student.getAsurite());
 
             if (currentStudentAttendance == null) {
                 unknownStudents++;
             } else {
+                Decorator12Attendance attendanceCard;
                 for (int i = 0; i < currentStudentAttendance.size(); i++) {
-                    Decorator12Attendance attendanceCard = new Decorator12Attendance(headers.get(i+1), Float.parseFloat(currentStudentAttendance.get(i)));
+                    attendanceCard = new Decorator12Attendance(headers.get(i+1), Float.parseFloat(currentStudentAttendance.get(i)));
                     attendanceCard.add(student);
+                    student = attendanceCard;
                 }
                 repository.updateStudent(student.getAsurite(), student);
             }

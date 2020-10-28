@@ -1,5 +1,7 @@
-package team1.sukhpreet; /**
- * sukhpreet.Decorator12Interface is the interface for fetching Student details
+package team1.sukhpreet;
+
+/**
+ * sukhpreet.Student12Interface is the interface for fetching Student details
  * as a part of the Decorator design pattern
  *
  * @author  Sukhpreet Anand
@@ -10,16 +12,7 @@ package team1.sukhpreet; /**
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Decorator12Interface {
-
-	protected String id;
-	protected String firstName;
-	protected String lastName;
-	protected String program;
-	protected String level;
-	protected String asurite;
-	protected List<Decorator12SingleGrade> grades = new ArrayList<>();
-	protected List<Decorator12SingleAttendance> attendance = new ArrayList<>();
+public abstract class Decorator12Interface {
 
 	public abstract String getID();
 	public abstract String getFirstName();
@@ -27,11 +20,19 @@ abstract class Decorator12Interface {
 	public abstract String getProgram();
 	public abstract String getLevel();
 	public abstract String getAsurite();
-	public abstract List<Decorator12SingleGrade> getGrades();
-	public abstract List<Decorator12SingleAttendance> getAttendance();
+
+	public List<Decorator12SingleGrade> getGrades() {
+		List<Decorator12SingleGrade> list = new ArrayList<>();
+		return list;
+	}
+
+	public List<Decorator12SingleAttendance> getAttendance() {
+		List<Decorator12SingleAttendance> list = new ArrayList<>();
+		return list;
+	}
 
 	public String toString() {
-		return String.format("ID: " + id + ", Name: " + firstName + " " + lastName + ", Program: " + program + ", Level: " + level + ", ASURITE: " + asurite + ", Grades: " + grades + ", Attendance: " + attendance);
+		return String.format("ID: " + getID() + ", Name: " + getFirstName() + " " + getLastName() + ", Program: " + getProgram() + ", Level: " + getLevel() + ", ASURITE: " + getAsurite());
 	}
 }
 

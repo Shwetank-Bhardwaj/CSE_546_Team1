@@ -1,15 +1,13 @@
 package team1;
 
-import team1.aditya.Reporter14;
-import team1.gaurav.Repository11;
-import team1.kings.ObserverPlotter16;
-import team1.nagarjun.Grader13;
+import team1.isaac.ObserverTable15;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.awt.event.ActionListener;
+
+//import team1.kings.ObserverPlotter16;
 
 /**
  * Main17 class for making connections between multiple components of this project
@@ -22,35 +20,15 @@ import java.io.FileNotFoundException;
 
 public class Main17 extends JFrame {
 
-    private Repository11 repository11;
-
-    private Grader13 grader13;
-    private Reporter14 reporter14;
-
-//    private ObserverTable15 observerTable15;
-    private ObserverPlotter16 observerPlotter16;
+    private Main17Controller main17Controller;
 
     public static void main(String[] args) {
-        Main17 main17 = new Main17();
-        main17.createUI();
+        Main17Controller main17Controller = new Main17Controller();
+        Main17 main17 = new Main17(main17Controller);
     }
 
-    public Main17() {
-        repository11 = Repository11.getInstance();
-
-        grader13 = new Grader13(repository11);
-        reporter14 = new Reporter14(repository11);
-
-//        observerTable15 = new ObserverTable15(repository11);
-
-        observerPlotter16 = new ObserverPlotter16(repository11);
-
-//        repository11.addObserver(observerTable15);
-        repository11.addObserver(observerPlotter16);
-    }
-
-    private void createUI() {
-
+    public Main17(Main17Controller main17Controller) {
+        this.main17Controller = main17Controller;
         setTitle("Team 1 Project");
         JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -60,8 +38,14 @@ public class Main17 extends JFrame {
         JPanel innerPanel = new JPanel(new BorderLayout());
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 
-//        innerPanel.add(observerTable15);
-        innerPanel.add(observerPlotter16);
+        ObserverTable15 observerTable15 = new ObserverTable15(main17Controller.getRepo());
+        main17Controller.getRepo().addObserver(observerTable15);
+
+//        ObserverPlotter16 observerPlotter16 = new ObserverPlotter16(main17Controller.getRepo());
+//        main17Controller.getRepo().addObserver(observerPlotter16);
+
+        innerPanel.add(observerTable15);
+//        innerPanel.add(observerPlotter16);
 
         mainPanel.add(innerPanel);
         add(mainPanel);
@@ -86,62 +70,22 @@ public class Main17 extends JFrame {
 
     public JButton getRepositoryButton() {
         JButton repoButton = new JButton("Open Student File");
-        add(repoButton);
-        repoButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String filePath = selectFile();
-                repository11.loadRoster(filePath);
-            }
-        });
+        repoButton.addActionListener(main17Controller.repositoryListener);
         return repoButton;
     }
 
     public JButton getGradesButton() {
         JButton gradeButton = new JButton("Open Grade File");
-        add(gradeButton);
-        gradeButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String filePath = selectFile();
-                try {
-                    grader13.loadGrades(filePath);
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
-            }
-        });
+        gradeButton.addActionListener(main17Controller.gradesListener);
         return gradeButton;
     }
 
     public JButton getAttendanceButton() {
         JButton attendanceButton = new JButton("Open Attendance File");
-        add(attendanceButton);
-        attendanceButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String filePath = selectFile();
-                try {
-                    reporter14.loadAttendance(filePath);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+        attendanceButton.addActionListener(main17Controller.attendanceListener);
         return attendanceButton;
     }
 
-    public String selectFile() {
-        JFileChooser mFileChooser = new JFileChooser();
-        if (mFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File f = mFileChooser.getSelectedFile();
-            if (f == null) {
-                return "";
-            }
-            return f.toString();
-        }
-        return "";
-    }
 
 }
 

@@ -1,32 +1,44 @@
 package team1.sukhpreet;
-
 /**
  * sukhpreet.Decorator12Grades is the concrete decorator subclass extending
  * sukhpreet.Decorator12Decorator and is responsible for adding student grade
  * information to the Student object along with the core data
  * as a part of the Decorator design pattern
  *
- * @author Sukhpreet Anand
+ * @author  Sukhpreet Anand
  * @version 1.0
- * @since 10-25-2020
+ * @since   10-25-2020
  */
 
+import java.util.List;
 
 public class Decorator12Grades extends Decorator12Decorator {
+	
+	private String assignmentName;
+	private float score;
+	private float maxScore;
+	
+	public Decorator12Grades(String assignmentName, float score, float maxScore) {
+		this.assignmentName = assignmentName;
+		this.maxScore = maxScore;
+		this.score = score;
+	}
+	
+	@Override
+	public void add(Decorator12Interface student) {
+		super.add(student);
+	}
 
-    private String assignmentName;
-    private float score;
-    private float maxScore;
+	@Override
+	public List<Decorator12SingleGrade> getGrades() {
+		List<Decorator12SingleGrade> list = super.getGrades();
+		list.add(new Decorator12SingleGrade(assignmentName, (score/maxScore)*100));
+		return list;
+	}
 
-    public Decorator12Grades(String assignmentName, float score, float maxScore) {
-        this.assignmentName = assignmentName;
-        this.maxScore = maxScore;
-        this.score = score;
-    }
+	@Override
+	public List<Decorator12SingleAttendance> getAttendance() {
+		return super.getAttendance();
+	}
 
-    @Override
-    public void add(Decorator12Interface student) {
-        super.add(student);
-        student.grades.add(new Decorator12SingleGrade(assignmentName, score / maxScore * 100));
-    }
 }
