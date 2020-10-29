@@ -3,7 +3,7 @@ package team1.nagarjun;
 import team1.gaurav.Repository11;
 import team1.gaurav.Repository11Iterator;
 import team1.sukhpreet.Decorator12Grades;
-import team1.sukhpreet.Decorator12Interface;
+import team1.sukhpreet.Decorator12;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Grader13 {
 
-    Repository11 repository;
+    private Repository11 repository;
 
     public Grader13(Repository11 repository) {
         this.repository = repository;
@@ -26,7 +26,8 @@ public class Grader13 {
         String csvLine;
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             while ((csvLine = br.readLine()) != null) {
-                if (csvLine.length() < 1) {
+                String[] split = csvLine.split(",");
+                if (csvLine.length() < 1 || split.length < 1) {
                     continue;
                 }
                 if (csvLine.startsWith("SIS Login ID")) {
@@ -47,7 +48,7 @@ public class Grader13 {
 
         Repository11Iterator itr = repository.getIterator();
         while (itr.hasNext()) {
-            Decorator12Interface student = itr.next();
+            Decorator12 student = itr.next();
             List<String> currentStudentGrades = studentGrades.get(student.getAsurite());
             if (currentStudentGrades == null) {
                 unknownStudents++;

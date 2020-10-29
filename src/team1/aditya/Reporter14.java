@@ -3,7 +3,7 @@ package team1.aditya;
 import team1.gaurav.Repository11;
 import team1.gaurav.Repository11Iterator;
 import team1.sukhpreet.Decorator12Attendance;
-import team1.sukhpreet.Decorator12Interface;
+import team1.sukhpreet.Decorator12;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +20,7 @@ import java.util.*;
 
 public class Reporter14 {
 
-    Repository11 repository;
+    private Repository11 repository;
 
     public Reporter14(Repository11 repository) {
         this.repository = repository;
@@ -56,7 +56,7 @@ public class Reporter14 {
 
         Repository11Iterator itr = repository.getIterator();
         while (itr.hasNext()) {
-            Decorator12Interface student = itr.next();
+            Decorator12 student = itr.next();
             List<String> currentStudentAttendance = studentAttendance.get(student.getAsurite());
 
             if (currentStudentAttendance == null) {

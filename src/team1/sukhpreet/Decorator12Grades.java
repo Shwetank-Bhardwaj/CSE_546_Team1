@@ -1,7 +1,7 @@
 package team1.sukhpreet;
 /**
  * sukhpreet.Decorator12Grades is the concrete decorator subclass extending
- * sukhpreet.Decorator12Decorator and is responsible for adding student grade
+ * sukhpreet.Decorator12AbstractDecorator and is responsible for adding student grade
  * information to the Student object along with the core data
  * as a part of the Decorator design pattern
  *
@@ -12,7 +12,7 @@ package team1.sukhpreet;
 
 import java.util.List;
 
-public class Decorator12Grades extends Decorator12Decorator {
+public class Decorator12Grades extends Decorator12AbstractDecorator {
 	
 	private String assignmentName;
 	private float score;
@@ -25,7 +25,7 @@ public class Decorator12Grades extends Decorator12Decorator {
 	}
 	
 	@Override
-	public void add(Decorator12Interface student) {
+	public void add(Decorator12 student) {
 		super.add(student);
 	}
 

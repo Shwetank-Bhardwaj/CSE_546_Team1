@@ -1,6 +1,6 @@
 package team1.sukhpreet; /**
  * sukhpreet.Decorator12Attendance is the concrete decorator subclass extending
- * sukhpreet.Decorator12Decorator and is responsible for adding student attendance
+ * sukhpreet.Decorator12AbstractDecorator and is responsible for adding student attendance
  * information to the Student object along with the core data
  * as a part of the Decorator design pattern
  *
@@ -12,7 +12,7 @@ package team1.sukhpreet; /**
 
 import java.util.List;
 
-public class Decorator12Attendance extends Decorator12Decorator {
+public class Decorator12Attendance extends Decorator12AbstractDecorator {
 	
 	private String date;
 	private float minutes;
@@ -23,7 +23,7 @@ public class Decorator12Attendance extends Decorator12Decorator {
 	}
 	
 	@Override
-	public void add(Decorator12Interface student) {
+	public void add(Decorator12 student) {
 		super.add(student);
 	}
 

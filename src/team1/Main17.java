@@ -3,12 +3,11 @@ package team1;
 import team1.aditya.Reporter14;
 import team1.gaurav.Repository11;
 import team1.isaac.ObserverTable15;
+import team1.kings.ObserverPlotter16;
 import team1.nagarjun.Grader13;
 
 import javax.swing.*;
 import java.awt.*;
-
-import team1.kings.ObserverPlotter16;
 
 /**
  * Main17 class for making connections between multiple components of this project
@@ -34,7 +33,7 @@ public class Main17 extends JFrame {
         repository11.addObserver(observerPlotter16);
 
         Main17Controller main17Controller = new Main17Controller(repository11, grader13, reporter14, observerTable15, observerPlotter16);
-        Main17 main17 = new Main17(main17Controller);
+        new Main17(main17Controller);
     }
 
     public Main17(Main17Controller main17Controller) {

@@ -1,6 +1,6 @@
 package team1.gaurav;
 
-import team1.sukhpreet.Decorator12Interface;
+import team1.sukhpreet.Decorator12;
 
 /**
  * gaurav.Repository11Iterator is the interface to implement iterator
@@ -13,5 +13,5 @@ import team1.sukhpreet.Decorator12Interface;
 public interface Repository11Iterator {
 
 	public boolean hasNext();
-	public Decorator12Interface next();
+	public Decorator12 next();
 }

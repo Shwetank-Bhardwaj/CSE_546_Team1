@@ -8,8 +8,8 @@ package team1.gaurav;
  * @since 10-25-2020
  */
 
+import team1.sukhpreet.Decorator12StudentCoreData;
 import team1.sukhpreet.Decorator12;
-import team1.sukhpreet.Decorator12Interface;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -25,9 +25,9 @@ public class Repository11FileHelper {
 	private static final int academicLevelIDX = 4;
 	private static final int asuriteIdIDX = 5;
 
-	public static Map<String, Decorator12Interface> readCSV(String filePath) {
+	public static Map<String, Decorator12> readCSV(String filePath) {
 
-		Map<String, Decorator12Interface> studentList = new HashMap<>();
+		Map<String, Decorator12> studentList = new HashMap<>();
 		System.out.println(filePath);
 
 		try (BufferedReader fileReader = new BufferedReader(new java.io.FileReader(filePath))){
@@ -36,7 +36,7 @@ public class Repository11FileHelper {
 			while((fileRow = fileReader.readLine()) != null) {
 				String[] tokens = fileRow.split(DELIMITER);
 				if(tokens.length == 6){
-					Decorator12Interface student = new Decorator12(tokens[studentIdIDX], tokens[firstNameIDX], tokens[lastNameIDX], tokens[programPlanIDX], tokens[academicLevelIDX], tokens[asuriteIdIDX]);
+					Decorator12 student = new Decorator12StudentCoreData(tokens[studentIdIDX], tokens[firstNameIDX], tokens[lastNameIDX], tokens[programPlanIDX], tokens[academicLevelIDX], tokens[asuriteIdIDX]);
 					studentList.put(tokens[asuriteIdIDX],student);
 				}
 			}

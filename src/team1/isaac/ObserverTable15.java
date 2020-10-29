@@ -1,25 +1,23 @@
 package team1.isaac;
 
+import team1.gaurav.Repository11;
+import team1.gaurav.Repository11Iterator;
+import team1.sukhpreet.Decorator12;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import team1.gaurav.*;
-import team1.sukhpreet.*;
-
 
 public class ObserverTable15 extends JPanel implements Observer {
     private Repository11 repository;
-    private String[][] blankData = {{"","","","","",""}};
+    private String[][] blankData = {{"", "", "", "", "", ""}};
     private String[] colHeaders = {"id", "first name", "last name", "program", "level", "asurite"};
     private JTable table = new JTable(blankData, colHeaders);
     private JScrollPane scrollPane;
 
-    public ObserverTable15(Repository11 repository){
+    public ObserverTable15(Repository11 repository) {
         this.repository = repository;
         refreshPanel(blankData);
     }
@@ -41,21 +39,15 @@ public class ObserverTable15 extends JPanel implements Observer {
         this.remove(scrollPane);
         data.clear();
         Repository11Iterator iterator = repository.getIterator();
-        while(iterator.hasNext()){
-            Object item = iterator.next();
-            if(item instanceof Decorator12){
-                Decorator12Interface student = (Decorator12Interface) item;
-                String[] studentData = {student.getID(), student.getFirstName(), student.getLastName(), student.getProgram(), student.getLevel(), student.getAsurite()};
-                data.add(studentData);
-            }
-            else {
-            }
+        while (iterator.hasNext()) {
+            Decorator12 student = iterator.next();
+            String[] studentData = {student.getID(), student.getFirstName(), student.getLastName(), student.getProgram(), student.getLevel(), student.getAsurite()};
+            data.add(studentData);
         }
         String[][] tableContent = new String[data.size()][];
         for (int i = 0; i < data.size(); i++) {
             tableContent[i] = data.get(i);
         }
-
         refreshPanel(tableContent);
     }
 

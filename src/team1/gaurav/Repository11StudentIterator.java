@@ -1,15 +1,15 @@
 package team1.gaurav;
 
-import team1.sukhpreet.Decorator12Interface;
+import team1.sukhpreet.Decorator12;
 
 import java.util.Map;
 
 public class Repository11StudentIterator implements Repository11Iterator {
 
     private int index = 0;
-    private Map<String, Decorator12Interface> studentList;
+    private Map<String, Decorator12> studentList;
 
-    public Repository11StudentIterator(Map<String, Decorator12Interface> studentList) {
+    public Repository11StudentIterator(Map<String, Decorator12> studentList) {
         this.studentList = studentList;
     }
 
@@ -22,7 +22,7 @@ public class Repository11StudentIterator implements Repository11Iterator {
     }
 
     @Override
-    public Decorator12Interface next() {
+    public Decorator12 next() {
         Object key = studentList.keySet().toArray()[index++];
         if (!this.hasNext() && key == null) {
             return null;

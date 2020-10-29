@@ -1,5 +1,5 @@
 package team1.sukhpreet; /**
- * sukhpreet.Decorator12Decorator is the abstract decorator class extending
+ * sukhpreet.Decorator12AbstractDecorator is the abstract decorator class extending
  * sukhpreet.Student12Interface and is responsible for decorating extra
  * student information to the Student object along with the core data
  * as a part of the Decorator design pattern
@@ -12,11 +12,11 @@ package team1.sukhpreet; /**
 
 import java.util.List;
 
-public class Decorator12Decorator extends Decorator12Interface {
+public class Decorator12AbstractDecorator extends Decorator12 {
 	
-	protected Decorator12Interface student;
+	protected Decorator12 student;
 	
-	public void add(Decorator12Interface student) {
+	public void add(Decorator12 student) {
 		this.student = student;
 	}
 

@@ -15,8 +15,8 @@ public class Main17Controller {
     private Repository11 repository11;
     private Grader13 grader13;
     private Reporter14 reporter14;
-    private final ObserverTable15 observerTable15;
-    private final ObserverPlotter16 observerPlotter16;
+    private ObserverTable15 observerTable15;
+    private ObserverPlotter16 observerPlotter16;
 
     public Main17Controller(Repository11 repository11, Grader13 grader13, Reporter14 reporter14, ObserverTable15 observerTable15, ObserverPlotter16 observerPlotter16) {
         this.repository11 = repository11;
@@ -24,10 +24,6 @@ public class Main17Controller {
         this.reporter14 = reporter14;
         this.observerTable15 = observerTable15;
         this.observerPlotter16 = observerPlotter16;
-    }
-
-    public Repository11 getRepo() {
-        return repository11;
     }
 
     public void loadRoster(Component component) {
