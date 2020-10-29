@@ -1,61 +1,78 @@
 package team1;
 
+
+import org.jfree.util.Log;
 import team1.aditya.Reporter14;
 import team1.gaurav.Repository11;
-import team1.isaac.ObserverTable15;
-import team1.kings.ObserverPlotter16;
 import team1.nagarjun.Grader13;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Main17Controller class is controlling the listeners and initializing
+ *
+ * @author Shwetank Bhardwaj
+ * @version 1.0
+ * @since 10-25-2020
+ */
+
 
 public class Main17Controller {
 
     private Repository11 repository11;
     private Grader13 grader13;
     private Reporter14 reporter14;
-    private ObserverTable15 observerTable15;
-    private ObserverPlotter16 observerPlotter16;
+    private Main17UI main17UI;
 
-    public Main17Controller(Repository11 repository11, Grader13 grader13, Reporter14 reporter14, ObserverTable15 observerTable15, ObserverPlotter16 observerPlotter16) {
+    public Main17Controller(Repository11 repository11, Grader13 grader13, Reporter14 reporter14, Main17UI main17UI) {
+        main17UI.createUI();
         this.repository11 = repository11;
         this.grader13 = grader13;
         this.reporter14 = reporter14;
-        this.observerTable15 = observerTable15;
-        this.observerPlotter16 = observerPlotter16;
+        this.main17UI = main17UI;
+        this.main17UI.addRepoClickListener(new ButtonClickListener());
+        this.main17UI.addGradeClickListener(new ButtonClickListener());
+        this.main17UI.addAttendanceClickListener(new ButtonClickListener());
     }
 
-    public void loadRoster(Component component) {
-        String filePath = selectFile(component);
+    private void loadRoster() {
+        String filePath = main17UI.selectFile();
         repository11.loadRoster(filePath);
     }
-    public void loadGrades(Component component) {
-        String filePath = selectFile(component);
+
+    public void loadGrades() {
+        String filePath = main17UI.selectFile();
         grader13.loadGrades(filePath);
     }
-    public void loadAttendance(Component component) {
-        String filePath = selectFile(component);
+
+    public void loadAttendance() {
+        String filePath = main17UI.selectFile();
         reporter14.loadAttendance(filePath);
     }
 
-    public String selectFile(Component component) {
-        JFileChooser mFileChooser = new JFileChooser();
-        if (mFileChooser.showOpenDialog(component) == JFileChooser.APPROVE_OPTION) {
-            File f = mFileChooser.getSelectedFile();
-            if (f == null) {
-                return "";
+    public class ButtonClickListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String command = e.getActionCommand();
+                switch (command) {
+                    case "Open Student File":
+                        loadRoster();
+                        break;
+                    case "Open Grade File":
+                        loadGrades();
+                        break;
+                    case "Open Attendance File":
+                        loadAttendance();
+                        break;
+                }
+            } catch (Exception ex) {
+                Log.debug(ex.getMessage());
             }
-            return f.toString();
         }
-        return "";
+
     }
 
-    public JPanel getStudentTable() {
-        return observerTable15;
-    }
 
-    public JPanel getGradePlotter() {
-        return observerPlotter16;
-    }
 }
